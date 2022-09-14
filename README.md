@@ -1,8 +1,7 @@
 # portfolio_optimization
-* Created a tool that estimates data science salaries (MAE ~ $ 11K) to help data scientists negotiate their income when they get a job.
-* Scraped over 1000 job descriptions from glassdoor using python and selenium
-* Engineered features from the text of each job description to quantify the value companies put on python, excel, aws, and spark. 
-* Optimize portfolio giving arbitrary initial portfolio weights by maximizing sharpe_ratio using SLSQP (Sequential Least Squares Programming). 
+* Prepared stock market data from various sources. Performed portfolio analysis using CAPM (capital asset pricing model).
+* Portfolio Optimization using 2000 Monte Carlo Simulations.
+* Optimize arbitrary initial portfolio weights by maximizing sharpe_ratio using SLSQP (Sequential Least Squares Programming). 
 
 ## Code and Resources Used 
 **Python Version:** 3.7  
@@ -30,7 +29,7 @@ Correlation matrix of the 10 stocks. Visualize using seaborn. According to the c
 
 ![alt text](https://github.com/XYU1204/portfolio_optimization/blob/main/portfolio_worth_over_time.png "Simple portfolio with equal weights")
 
-created a simple portfolio with equal weight (invest 5000 dollar equally to each stock). The figure shows the portfolio worth over time.
+When investing, we need to decide which percentage (weight) of our investment money goes to which stock. In simple case, we created a portfolio with equal weight (invest 5000 dollar equally to each stock). The figure shows the portfolio worth over time.
 
 
 **Apply CAPM formula to calculate the return for the portfolio**  
@@ -69,9 +68,7 @@ We ran 2000 simulations with randomized normalized weights, calculated their rel
 
 ![alt text](https://github.com/XYU1204/portfolio_optimization/blob/main/newplot.png "best sharpe ratio")
 
-
-
-
+Now, for any given arbitrary portfolio, we can perform optimization by maximizing the sharpe ratio using Sequential Least Squares Programming. In our example, we tried an initialization of [0.04307998, 0.02908569, 0.09863662, 0.00991209, 0.04099922, 0.20746367, 0.12461258, 0.26182388, 0.04255328, 0.14183299]. The initialization has annual portfolio return of 222% and sharpe ratio of 0.913. Such portfolio profile is expected to be profitable but highly violatile, which means investors would quickly loose assest as well. After optimization, we found the optimal portfolio weights to be [2.19955699e-01, 1.41091263e-01, 6.80298803e-17, 4.45286229e-01, 3.56770535e-17, 1.93666809e-01, 3.35075580e-17, 7.89658044e-17, 2.40790986e-17, 1.75234249e-17]. The optimized portfolio has annual return of 464%, which is a 208.8% improvement compared to initialization, and sharpe ratio of 0.913, which is a 145.1% improvement comapred to initialization. The optimized portfolio is more profitable and more stable at the same time. 
 
 
 

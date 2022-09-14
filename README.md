@@ -14,7 +14,19 @@ In this project, we studied 5 year stocks market data of the top 10 most traded 
 
 ## [Exploratory Data Analysis and Simple Portfolio Statistics](https://github.com/XYU1204/portfolio_optimization/blob/main/EDA_and_simple_portfolio_allocation.ipynb)
 ![alt text](https://github.com/XYU1204/portfolio_optimization/blob/main/all_stocks_normalized.png "Normalized stock price over time")
+
 Normalized stock price over time (price on later date compared to price on the first day of the data set).
 
+
 ![alt text](https://github.com/XYU1204/portfolio_optimization/blob/main/daily_return_frequency.png "daily return distribution")
+
 Daily return rate distribution for each stock. If the daily return is more "spread out", the stock is more volatile. According to the figure, Tesla is the most volatile stock.
+
+
+![alt text](https://github.com/XYU1204/portfolio_optimization/blob/main/correlation_matrix.png "correlation matrix")
+
+Correlation matrix of the 10 stocks. Visualize using seaborn. According to the correlation matrix, Walmart has small correlation in daily return with all other stocks. The reason might be that it belong to retail industry. Microsoft and Apple has the highest correlation at 0.74. They both belong to IT industry.
+
+![alt text](https://github.com/XYU1204/portfolio_optimization/blob/main/portfolio_worth_over_time.png "Simple portfolio with equal weights")
+
+created a simple portfolio with equal weight (invest 5000 dollar equally to each stock). The figure shows the portfolio worth over time.

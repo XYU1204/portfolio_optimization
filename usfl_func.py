@@ -76,3 +76,39 @@ def portfolio_statistical_analysis(df, weights):
     sharpe_ratio = expected_portfolio_return/expected_volatility 
     
     return cummulative_return.values[0], expected_portfolio_return, expected_volatility, sharpe_ratio
+
+from scipy.optimize import minimize
+
+# Since optimization works as a minimizing function, we take negative of sharpe ratio and then try minimize it.
+
+# Define a function that calculates the negative Sharpe ratio
+def calculate_negative_sharpe_func(weights, df):
+    cum_return, exp_portfolio_return, volatility, sharpe_ratio = portfolio_statistical_analysis(stocks_df, weights)
+    return sharpe_ratio * -1
+
+# Function to define optimization constraints (make sure sum of all weights add to 1)
+def optimization_constraints_func(weights, df):
+    return np.sum(weights) - 1
+
+# Function to obtain the "volatility" for a given set of portfolio weights
+def calculate_volatility_func(weights, df):
+    cum_return, exp_portfolio_return, volatility, sharpe_ratio = portfolio_statistical_analysis(stocks_df, weights)
+    return volatility
+
+# Function to get the return for a particular weight
+def calculate_return_func(weights, df):
+    cum_return, exp_portfolio_return, volatility, sharpe_ratio = portfolio_statistical_analysis(stocks_df, weights)
+    return exp_portfolio_return
+
+
+def portfolio_optimization_evaluate(initialization, df, bounds, contraints_func = optimization_constraints_func, func = calculate_negative_sharpe_func):
+    cummulative_return_i, portfolio_return_value_i, vol_value_i, sharpe_ratio_i = portfolio_statistical_analysis(stocks_df, initialization)
+    optimization_constraint = ({'type':'eq','fun': optimization_constraints_func})
+    optimization_results = minimize(func, initialization, method = 'SLSQP', bounds = bounds, constraints = optimization_constraint)
+    optimized_weights = optimization_results.x
+    cummulative_return_SLSQP, portfolio_return_value_SLSQP, vol_value_SLSQP, sharpe_ratio_SLSQP = portfolio_statistical_analysis(stocks_df, optimized_weights)
+    return_improved = (cummulative_return_SLSQP - cummulative_return_i)/cummulative_return_i*100
+    sharpe_ratio_improved = (sharpe_ratio_SLSQP - sharpe_ratio_i)/sharpe_ratio_i*100
+    return return_improved, sharpe_ratio_improved
+    
+    

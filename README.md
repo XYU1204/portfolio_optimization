@@ -2,7 +2,7 @@
 * Created a tool that estimates data science salaries (MAE ~ $ 11K) to help data scientists negotiate their income when they get a job.
 * Scraped over 1000 job descriptions from glassdoor using python and selenium
 * Engineered features from the text of each job description to quantify the value companies put on python, excel, aws, and spark. 
-* Optimized Linear, Lasso, and Random Forest Regressors using GridsearchCV to reach the best model. 
+* Optimize portfolio giving arbitrary initial portfolio weights by maximizing sharpe_ratio using SLSQP (Sequential Least Squares Programming). 
 
 ## Code and Resources Used 
 **Python Version:** 3.7  
@@ -61,9 +61,17 @@ The statistics are calculated as following:
 
 expected_annual_portfolio_return = sum(avg_daily_return_of_each_stock * weights * 252_trading_days_per_year)
 
-expected_annual_violatility (standard deviation) = $\sqrt{W^T \Sigma W }$, where W is the weight vector, and $\Sigma$ is the covariance matrix of the daily_return_rate of stocks * 252_trading_days_per_year
+expected_annual_violatility (standard deviation) = $\sqrt{w^T \Sigma w}$, where W is the weight vector, and $\Sigma$ is the covariance matrix of the daily_return_rate of stocks * 252_trading_days_per_year
 
 sharpe_ratio = expected_annual_portfolio_return/expected_annual_volatility
+
+We ran 2000 simulations with randomized normalized weights, calculated their relevant statistics. We found the best portfolio among the 2000 by choosing the one with the highest sharpe ratio shown as following.
+
+![alt text](https://github.com/XYU1204/portfolio_optimization/blob/main/newplot.png "best sharpe ratio")
+
+
+
+
 
 
 

@@ -13,6 +13,7 @@ In this project, we studied 5 year stocks market data of the top 10 most traded 
 ![alt text](https://github.com/XYU1204/portfolio_optimization/blob/main/stocks_df.png)
 
 ## [Exploratory Data Analysis and Simple Portfolio Statistics](https://github.com/XYU1204/portfolio_optimization/blob/main/EDA_and_simple_portfolio_allocation.ipynb)
+
 ![alt text](https://github.com/XYU1204/portfolio_optimization/blob/main/all_stocks_normalized.png "Normalized stock price over time")
 
 Normalized stock price over time (price on later date compared to price on the first day of the data set).
@@ -31,9 +32,10 @@ Correlation matrix of the 10 stocks. Visualize using seaborn. According to the c
 
 created a simple portfolio with equal weight (invest 5000 dollar equally to each stock). The figure shows the portfolio worth over time.
 
+
 **Apply CAPM formula to calculate the return for the portfolio**  
 
-#### The CAPM formula is represented as following: ####
+ The CAPM formula is represented as following:
 
  $ r_i = r_f + \beta_i (r_m -r_f) $
  
@@ -47,4 +49,21 @@ created a simple portfolio with equal weight (invest 5000 dollar equally to each
  
 For S&P 500 (which we use as $r_m$), we downloaded data from https://www.marketwatch.com/investing/index/spx/download-data. We parsed the data file and chose the same date range as the 10 stocks.
 
+We used linear regression between each stock and S&P 500 to find beta. 
+
 Expected return per year based on CAPM for the portfolio is 15.3%
+
+## [Model Building and Portfolio Optimization](https://github.com/XYU1204/portfolio_optimization/blob/main/portfolio_optimization.ipynb)
+
+In our usfl_fun module, we created two functions to allocate portfolio according to weights, and to calculate relevant statistics for the portfolios.
+
+The statistics are calculated as following:
+
+expected_annual_portfolio_return = sum(avg_daily_return_of_each_stock * weights * 252_trading_days_per_year)
+
+expected_annual_violatility (standard deviation) = $\sqrt{W^T \Sigma W }$, where W is the weight vector, and $\Sigma$ is the covariance matrix of the daily_return_rate of stocks * 252_trading_days_per_year
+
+sharpe_ratio = expected_annual_portfolio_return/expected_annual_volatility
+
+
+
